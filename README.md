@@ -3,3 +3,4 @@ CS157A project
 
 Authors:
 Jeffrey Wu
+Samer Eid
