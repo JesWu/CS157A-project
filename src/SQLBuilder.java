@@ -7,15 +7,36 @@ public class SQLBuilder
 	public static String DB_URL = new String("jdbc:mysql://localhost:3306/test");
 	public static String JDBC_DRIVER = new String("com.mysql.cj.jdbc.Driver");
 	static String[]	Tables = {
-					"create table STATE (" +
-						"ABBREVIATION char(2) not null, " +
-						"NAME varchar(32) not null, " +
-						"ENTERED_UNION date null, " + 
-						"CAPITAL varchar(32) not null, " +
-						"REGION varchar(16) not null, " +
-						"AREA int not null, " +
-						"FLOWER varchar(32) null, " +
-						"BIRD varchar(32) null)"
+					"create table TFI (" +
+					        "ID varchar(16) not null, " +
+					        "DATE date not null, " +
+					        "FIRSTNAME varchar(16) not null, " +
+					        "LASTNAME varchar(16) not null, " + 
+					        "AwarenessLevel int not null, " +
+					        "LoudnessLevel int not null, " +
+					        "AnnoyanceLevel int not null, " +
+					        "ControllingImpairmentLevel int not null, " +
+					        "CopingImpairmentLevel int not null, " +
+					        "IgnoringImpairmentLevel int not null, " +
+					        "ConcentratingImpairmentLevel int not null, " +
+					        "ThinkingClearImpairmentLevel int not null, " +
+					        "FocusImpairmentLevel int not null, " +
+					        "EaseOfSleepImpairmentLevel int not null, " +
+					        "SleepingTimeImpairmentLevel int not null, " +
+					        "PeacefulSleepImpairmentLevel int not null, " +
+					        "HearingClearImpairmentLevel int not null, " +
+					        "UnderstandPeopleImpairmentLevel int not null, " +
+					        "ConversationFollowingImpairmentLevel int not null, " +
+					        "QuietImpairmentLevel int not null, " +
+					        "RelaxingImpairmentLevel int not null, " +
+					        "PeaceandQuietImpairmentLevel int not null, " +
+					        "SocialActivityImpairmentLevel int not null, " +
+					        "EnjoymentImpairmentLevel int not null, " +
+					        "RelationshipInterferenceLevel int not null, " +
+					        "WorkInterferenceLevel int not null, " +
+					        "AnxietyLevel int not null, " +
+					        "UpsetLevel int not null, " +
+					        "DepressionLevel int not null)"
 						};
 
 	public static void
