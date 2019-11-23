@@ -1,6 +1,10 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
@@ -9,7 +13,7 @@ import javax.swing.*;
 
 public class TFI extends JFrame{
     
-    public TFI()
+    public TFI(Connection con)
     {
         this.setLayout(new BorderLayout());
         
@@ -20,28 +24,40 @@ public class TFI extends JFrame{
         /* name and date portion */
         JPanel top = new JPanel();
         JLabel name = new JLabel("Your Name: ");
-        JTextField nameText = new JTextField(15);
+        JTextField nameText = new JTextField("First Last", 15);
         JLabel date = new JLabel("Date: ");
-        JTextField dateText = new JTextField(10);
+        JTextField dateText = new JTextField("YYYY-MM-DD",10);
         JButton submit = new JButton("Submit");
         
         TreeMap<Integer, JSlider> sliderMap = new TreeMap<>();
-        int id = 0;
+        
         
         submit.addActionListener(new ActionListener()
         {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO Auto-generated method stub
-            System.out.println("You just submitted your entry!");
-            StringBuilder s = new StringBuilder();
-            s.append("insert into TFI values(" + id + "," + dateText.getText() + "," + nameText.getText() + ",");
-            for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
-                s.append(entry.getValue().getValue() + ",");
+
+            try {
+                String query = "SELECT MAX(id) FROM TFI";
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(query);
+                int id = rs.first() ? rs.getInt(1) + 1 : 0;
+                System.out.println("You just submitted your entry!, id of " + id);
+                String[] namep = nameText.getText().split(" ");
+                StringBuilder s = new StringBuilder();
+                s.append("insert into TFI values(" + id + ",'" + dateText.getText() + "','" + namep[0] + "','" + namep[1] + "',");
+                for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
+                    s.append(entry.getValue().getValue() + ",");
+                }
+                s.setLength(s.length() - 1); // get rid of extra comma
+                s.append(")");
+                System.out.println(s.toString());
+                st.execute(s.toString());
+            } catch (SQLException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
             }
-            s.setLength(s.length() - 1); // get rid of extra comma
-            s.append(")");
-            System.out.println(s.toString());
+            
         }
         });
 //      name.setBounds(10, 10, 10, 20);

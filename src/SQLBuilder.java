@@ -8,7 +8,7 @@ public class SQLBuilder
 	public static String JDBC_DRIVER = new String("com.mysql.cj.jdbc.Driver");
 	static String[]	Tables = {
 					"create table TFI (" +
-					        "ID varchar(16) not null, " +
+					        "ID int not null, " +
 					        "DATE date not null, " +
 					        "FIRSTNAME varchar(16) not null, " +
 					        "LASTNAME varchar(16) not null, " + 
@@ -40,7 +40,7 @@ public class SQLBuilder
 						};
 
 	public static void
-	main(String[] args) throws ClassNotFoundException
+	build(Connection con) throws ClassNotFoundException
 	{
 		
 		// Load the Driver
@@ -49,11 +49,6 @@ public class SQLBuilder
 
 		try
 		{
-		          // Get a connection from the connection factory
-			Connection con = DriverManager.getConnection(
-			DB_URL,
-			  //"jdbc:oracle:thin:@dbaprod1:1521:SHR1_PRD",
-USERNAME, PASSWORD);
 	
 			// Show some database/driver metadata
 			SQLUtil.printDriverInfo(con);
