@@ -1,5 +1,9 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.*;
 
@@ -20,6 +24,22 @@ public class TFI extends JFrame{
         JLabel date = new JLabel("Date: ");
         JTextField dateText = new JTextField(10);
         JButton submit = new JButton("Submit");
+        
+        TreeMap<Integer, JSlider> sliderMap = new TreeMap<>();
+        
+        submit.addActionListener(new ActionListener()
+        {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO Auto-generated method stub
+            System.out.println("You just submitted your entry!");
+            StringBuilder s = new StringBuilder();
+            for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
+                s.append("|" + entry.getValue().getValue());
+            }
+            System.out.println(s.toString());
+        }
+        });
 //      name.setBounds(10, 10, 10, 20);
 //      nameText.setBounds(30, 10, 100, 20);
 //      date.setBounds(10, 30, 10, 20);
@@ -37,36 +57,36 @@ public class TFI extends JFrame{
         
         /* questions portion */
         String[] questions = {
-            "I Over the PAST WEEK...",
+            "I Over the PAST WEEK... (0 = low, 10 = high)",
             "1. What percentage of your time awake were you consciously AWARE OF your tinnitus?",
             "2. How STRONG or LOUD was your tinnitus?",
             "3. What percentage of your time awake were you ANNOYED by your tinnitus?",
-            "SC Over the PAST WEEK...",
+            "SC Over the PAST WEEK... (0 = low, 10 = high)",
             "4. Did you feel IN CONTROL in regard to your tinnitus?",
             "5. How easy was it to COPE with your tinnitus?",
             "6. How easy was it to IGNORE your tinnitus?",
-            "C Over the PAST WEEK...",
+            "C Over the PAST WEEK... (0 = low, 10 = high)",
             "7. Your ability to CONCENTRATE?",
             "8. Your ability to THINK CLEARLY?",
             "9. Your ability to FOCUS ATTENTION on other things besides your tinnitus?",
-            "SL Over the PAST WEEK...",
+            "SL Over the PAST WEEK... (0 = low, 10 = high)",
             "10. How often did your tinnitus make id difficult to FALL ASLEEP or STAY ASLEEP?",
             "11. How often did your tinnitus cause you difficult in getting AS MUCH SLEEP as you needed?",
             "12. How much of the time did your tinnitus keep you from SLEEPING as DEEPLY or as PEACEFULLY as you would have liked?",
-            "A Over the PAST WEEK, how much has your tinnitus interfered with...",
+            "A Over the PAST WEEK, how much has your tinnitus interfered with... (0 = low, 10 = high)",
             "13. Your ability to HEAR CLEARLY?",
             "14. Your ability to UNDERSTAND PEOPLE who are talking?",
             "15. Your ability to FOLLOW CONVERSATIONS in a group or at meetings?",
-            "R Over the PAST WEEK, how much has your tinnitus interfered with...",
-            "16. Your QUIET RESTING ACTIVITIES",
+            "R Over the PAST WEEK, how much has your tinnitus interfered with... (0 = low, 10 = high)",
+            "16. Your QUIET RESTING ACTIVITIES?",
             "17. Your ability to RELAX?",
             "18. Your ability to enjoy \"PEACE AND QUIET\"?",
-            "Q Over the PAST WEEK, how much has your tinnitus interfered with...",
+            "Q Over the PAST WEEK, how much has your tinnitus interfered with... (0 = low, 10 = high)",
             "19. Your enjoyment of SOCIAL ACTIVITIES?",
             "20. Your ENJOYMENT OF LIFE?",
             "21. Your RELATIONSHIPS with family, friends, and other people?",
             "22. How often did your tinnitus cause you to have difficulty performing your WORK OR OTHER TASKS, such as home maintenance, school work, or caring for children or others?",
-            "E Over the PAST WEEK...",
+            "E Over the PAST WEEK... (0 = low, 10 = high)",
             "23. How ANXIOUS or WORRIED has your tinnitus made you feel?",
             "24. How BOTHERED or UPSET have you been because of your tinnitus?",
             "25. How DEPRESSED were you because of your tinnitus?"
@@ -76,7 +96,6 @@ public class TFI extends JFrame{
         //JPanel[] qPanels = new JPanel[25];
 //      JPanel qPanel = new JPanel(new GridLayout(25, 4));
         JPanel qPanel = new JPanel(new GridBagLayout());
-        HashMap<Integer, JSlider> sliderMap = new HashMap<>();
         int question = 0;
         
         for (int i = 0; i < questions.length; i++)
