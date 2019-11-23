@@ -26,6 +26,7 @@ public class TFI extends JFrame{
         JButton submit = new JButton("Submit");
         
         TreeMap<Integer, JSlider> sliderMap = new TreeMap<>();
+        int id = 0;
         
         submit.addActionListener(new ActionListener()
         {
@@ -34,9 +35,12 @@ public class TFI extends JFrame{
             // TODO Auto-generated method stub
             System.out.println("You just submitted your entry!");
             StringBuilder s = new StringBuilder();
+            s.append("insert into TFI values(" + id + "," + dateText.getText() + "," + nameText.getText() + ",");
             for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
-                s.append("|" + entry.getValue().getValue());
+                s.append(entry.getValue().getValue() + ",");
             }
+            s.setLength(s.length() - 1); // get rid of extra comma
+            s.append(")");
             System.out.println(s.toString());
         }
         });
