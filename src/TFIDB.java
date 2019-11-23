@@ -14,6 +14,9 @@ public class TFIDB {
                 DB_URL,
     USERNAME, PASSWORD);
         SQLBuilder.build(con);
+        con = DriverManager.getConnection(
+                DB_URL,
+    USERNAME, PASSWORD);
         new TFI(con);
     }
 }

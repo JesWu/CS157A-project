@@ -12,31 +12,40 @@ public class SQLBuilder
 					        "DATE date not null, " +
 					        "FIRSTNAME varchar(16) not null, " +
 					        "LASTNAME varchar(16) not null, " + 
-					        "AwarenessLevel int not null, " +
-					        "LoudnessLevel int not null, " +
-					        "AnnoyanceLevel int not null, " +
-					        "ControllingImpairmentLevel int not null, " +
-					        "CopingImpairmentLevel int not null, " +
-					        "IgnoringImpairmentLevel int not null, " +
-					        "ConcentratingImpairmentLevel int not null, " +
-					        "ThinkingClearImpairmentLevel int not null, " +
-					        "FocusImpairmentLevel int not null, " +
-					        "EaseOfSleepImpairmentLevel int not null, " +
-					        "SleepingTimeImpairmentLevel int not null, " +
-					        "PeacefulSleepImpairmentLevel int not null, " +
-					        "HearingClearImpairmentLevel int not null, " +
-					        "UnderstandPeopleImpairmentLevel int not null, " +
-					        "ConversationFollowingImpairmentLevel int not null, " +
-					        "QuietImpairmentLevel int not null, " +
-					        "RelaxingImpairmentLevel int not null, " +
-					        "PeaceandQuietImpairmentLevel int not null, " +
-					        "SocialActivityImpairmentLevel int not null, " +
-					        "EnjoymentImpairmentLevel int not null, " +
-					        "RelationshipInterferenceLevel int not null, " +
-					        "WorkInterferenceLevel int not null, " +
-					        "AnxietyLevel int not null, " +
-					        "UpsetLevel int not null, " +
-					        "DepressionLevel int not null)"
+					        "AwarenessLevel int, " +
+					        "LoudnessLevel int, " +
+					        "AnnoyanceLevel int, " +
+					        "ControllingImpairmentLevel int, " +
+					        "CopingImpairmentLevel int, " +
+					        "IgnoringImpairmentLevel int, " +
+					        "ConcentratingImpairmentLevel int, " +
+					        "ThinkingClearImpairmentLevel int, " +
+					        "FocusImpairmentLevel int, " +
+					        "EaseOfSleepImpairmentLevel int, " +
+					        "SleepingTimeImpairmentLevel int, " +
+					        "PeacefulSleepImpairmentLevel int, " +
+					        "HearingClearImpairmentLevel int, " +
+					        "UnderstandPeopleImpairmentLevel int, " +
+					        "ConversationFollowingImpairmentLevel int, " +
+					        "QuietImpairmentLevel int, " +
+					        "RelaxingImpairmentLevel int, " +
+					        "PeaceandQuietImpairmentLevel int, " +
+					        "SocialActivityImpairmentLevel int, " +
+					        "EnjoymentImpairmentLevel int, " +
+					        "RelationshipInterferenceLevel int, " +
+					        "WorkInterferenceLevel int, " +
+					        "AnxietyLevel int, " +
+					        "UpsetLevel int, " +
+					        "DepressionLevel int," +
+					        "I int, " +
+					        "SC int, " +
+					        "C int, " +
+					        "SL int, " +
+					        "A int, " +
+					        "R int, " +
+					        "Q int, " +
+					        "E int, " +
+					        "Total int)"
 						};
 
 	public static void

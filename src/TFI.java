@@ -42,14 +42,130 @@ public class TFI extends JFrame{
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(query);
                 int id = rs.first() ? rs.getInt(1) + 1 : 0;
-                System.out.println("You just submitted your entry!, id of " + id);
+                Integer i = 0;
+                Integer sc = 0;
+                Integer c = 0;
+                Integer sl = 0;
+                Integer a = 0;
+                Integer r = 0;
+                Integer q = 0;
+                Integer em = 0;
+                Integer total = 0;
+                int invalids = 0;
+                int subInvalids = 0;
+                int sum = 0;
+                //System.out.println("You just submitted your entry!, id of " + id);
                 String[] namep = nameText.getText().split(" ");
                 StringBuilder s = new StringBuilder();
                 s.append("insert into TFI values(" + id + ",'" + dateText.getText() + "','" + namep[0] + "','" + namep[1] + "',");
                 for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
-                    s.append(entry.getValue().getValue() + ",");
+                    if(entry.getValue().getValue() == -1) {
+                        s.append("null,");
+                    }else {
+                        s.append(entry.getValue().getValue() + ",");
+                    }
+                    if(entry.getKey() < 3 && entry.getValue().getValue() != -1) {
+                        i += entry.getValue().getValue();
+                    }else if(entry.getKey() < 6 && entry.getValue().getValue() != -1) {
+                        sc += entry.getValue().getValue();
+                    }else if(entry.getKey() < 9 && entry.getValue().getValue() != -1) {
+                        c += entry.getValue().getValue();
+                    }else if(entry.getKey() < 12 && entry.getValue().getValue() != -1) {
+                        sl += entry.getValue().getValue();
+                    }else if(entry.getKey() < 15 && entry.getValue().getValue() != -1) {
+                        a += entry.getValue().getValue();
+                    }else if(entry.getKey() < 18     && entry.getValue().getValue() != -1) {
+                        r += entry.getValue().getValue();
+                    }else if(entry.getKey() < 22 && entry.getValue().getValue() != -1) {
+                        q += entry.getValue().getValue();
+                    }else if(entry.getKey() < 25 && entry.getValue().getValue() != -1) {
+                        em += entry.getValue().getValue();
+                    }
                 }
-                s.setLength(s.length() - 1); // get rid of extra comma
+                
+                for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
+                    if(entry.getValue().getValue() == -1) {
+                        invalids++;
+                        subInvalids++;
+                    }else {
+                        sum += entry.getValue().getValue();
+                    }
+                    if(entry.getKey() == 2) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            i = (i / (3 - subInvalids)) * 10;
+                            s.append(i + ",");
+                        }
+                        subInvalids = 0;
+                    }else if(entry.getKey() == 5) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            sc = (sc / (3 - subInvalids)) * 10;
+                            s.append(sc + ",");
+                        }
+                        subInvalids = 0;
+                    }else if(entry.getKey() == 8) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            c = (c / (3 - subInvalids)) * 10;
+                            s.append(c + ",");
+                        }
+                        subInvalids = 0;
+                    }
+                    else if(entry.getKey() == 11) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            sl = (sl / (3 - subInvalids)) * 10;
+                            s.append(sl + ",");
+                        }
+                        subInvalids = 0;
+                    }
+                    else if(entry.getKey() == 14) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            a = (a / (3 - subInvalids)) * 10;
+                            s.append(a + ",");
+                        }
+                        subInvalids = 0;
+                    }
+                    else if(entry.getKey() == 17) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            r = (r / (3 - subInvalids)) * 10;
+                            s.append(r + ",");
+                        }
+                        subInvalids = 0;
+                    }else if(entry.getKey() == 21) {
+                        if(subInvalids == 4) {
+                            s.append("null,");
+                        }else {
+                            q = (q / (4 - subInvalids)) * 10;
+                            s.append(q + ",");
+                        }
+                        subInvalids = 0;
+                    }else if(entry.getKey() == 24) {
+                        if(subInvalids == 3) {
+                            s.append("null,");
+                        }else {
+                            em = (em / (3 - subInvalids)) * 10;
+                            s.append(em + ",");
+                        }
+                        subInvalids = 0;
+                    }
+                    
+                }
+                if(invalids > 6) {
+                    s.append("null");
+                }else {
+                    total = (sum / (25 - invalids)) * 10;
+                    s.append(total);
+                }
                 s.append(")");
                 System.out.println(s.toString());
                 st.execute(s.toString());
@@ -129,11 +245,12 @@ public class TFI extends JFrame{
             text.setBorder(null);
             
             if(questions[i].charAt(0) >= '0' && questions[i].charAt(0) <= '9') {
-                JSlider slider = new JSlider(0, 10);
+                JSlider slider = new JSlider(-1, 10);
                 slider.setMajorTickSpacing(1);
                 slider.setPaintTicks(true);
                 slider.setPaintLabels(true);
                 slider.setSnapToTicks(true);
+                slider.setValue(-1);
                 slider.setBackground(Color.WHITE);
                 
                 sliderMap.put(question++, slider);
