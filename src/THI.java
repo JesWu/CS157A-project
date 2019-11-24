@@ -1,11 +1,11 @@
 import java.awt.*;
 import javax.swing.*;
 
-public class THI extends JFrame{
-	
+public class THI extends JFrame
+{	
 	public THI()
 	{
-		this.setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());				// allows window to resize relative to center of jframe
 		
 		JPanel panel = new JPanel();
 		GridBagConstraints c = new GridBagConstraints();
@@ -17,16 +17,12 @@ public class THI extends JFrame{
 		JTextField nameText = new JTextField(15);
 		JLabel date = new JLabel("Date: ");
 		JTextField dateText = new JTextField(10);
-//		name.setBounds(10, 10, 10, 20);
-//		nameText.setBounds(30, 10, 100, 20);
-//		date.setBounds(10, 30, 10, 20);
-//		dateText.setBounds(30, 30, 100, 20);
-		
+
 		/* instruction portion */
 		JTextArea instructions = new JTextArea();
-		instructions.setLineWrap(true);					// add newlines				
-        instructions.setWrapStyleWord(true);			// add newlines by word
-        instructions.setEditable(false);				// read-only
+		instructions.setLineWrap(true);				// add newlines				
+        instructions.setWrapStyleWord(true);		// add newlines by word
+        instructions.setEditable(false);			// read-only
 		instructions.setText(
 			"Instructions: The purpose of this questionaire is to identify, quantify, and "
 			+ "evaluate the difficulties that you may be experiencing because of tinnitus. Please do not "
@@ -62,8 +58,6 @@ public class THI extends JFrame{
 			"24. Does your tinnitus get worse when you are under stress?",
 			"25. Does your tinnitus make you feel insecure?"
 		};
-		JPanel[] qPanels = new JPanel[25];
-//		JPanel qPanel = new JPanel(new GridLayout(25, 4));
 		JPanel qPanel = new JPanel(new GridBagLayout());
 		
 		for (int i = 0; i < questions.length; i++)
@@ -74,23 +68,18 @@ public class THI extends JFrame{
 			ButtonGroup group = new ButtonGroup();
 			JTextArea text = new JTextArea(questions[i]);
 			
-			text.setSize(500, 20);
+			text.setSize(500, 50);
 			text.setLineWrap(true);
 			text.setWrapStyleWord(true);
+			text.setBorder(null);
 			text.setEditable(false);
 			if (i % 2 == 0)
 				text.setBackground(null);
-			text.setBorder(null);
 			
 			group.add(rb1);
 			group.add(rb2);
 			group.add(rb3);
 			
-//			qPanels[i] = new JPanel();
-//			qPanels[i].add(new JLabel(questions[i]));
-//			qPanels[i].add(rb1);
-//			qPanels[i].add(rb2);
-//			qPanels[i].add(rb3);
 			c.fill = GridBagConstraints.HORIZONTAL;
 			c.gridx = 0;
 			c.gridy = 3+i*4;
@@ -123,32 +112,21 @@ public class THI extends JFrame{
 		c.gridx = 0;
 		c.gridy = 2;
 		panel.add(instructions, c);
-//		for (int i = 0; i < qPanels.length; i++)
-//			panel.add(qPanels[i]);
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(qPanel, c);
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);	// adjusted for faster scrolling speed
-//        JPanel contentPane = (JPanel) this.getContentPane();
-//        contentPane.add(scrollPane);
 		
 		this.add(scrollPane, BorderLayout.CENTER);		
-//		this.setContentPane(contentPane);
 		
-		this.setTitle("Project 3 - THI");
-//		this.setSize(6000, 6000);									// width x height
-//		Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize(); // set max size of screen
-//		this.setMaximumSize(DimMax);
+		this.setTitle("Tinnitus Handicap Inventory (THI)");
 		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Rectangle bounds = env.getMaximumWindowBounds();
 		System.out.println("Screen Bounds: " + bounds );
 		
-//		this.setLayout(new BorderLayout());						// best layout
-//		this.setSize(Math.min(600, bounds.width),Math.min(600, bounds.height));
 		this.pack();											// pack margins
-//		this.setSize(Math.min(this.getWidth(), bounds.width),Math.min(this.getHeight(), bounds.height));
 		this.setLocationRelativeTo(null); 						// centered relative to monitor screen
 		this.setVisible(true);									// display the frame
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	// close on exit
