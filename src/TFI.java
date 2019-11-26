@@ -64,8 +64,12 @@ public class TFI extends JFrame{
                     }else {
                         s.append(entry.getValue().getValue() + ",");
                     }
-                    if(entry.getKey() < 3 && entry.getValue().getValue() != -1) {
-                        i += entry.getValue().getValue();
+                    if(entry.getKey() < 3 && entry.getValue().getValue() != -1 && entry.getValue().getValue() != -10) {
+                        if(entry.getKey() == 0 || entry.getKey() == 2) {
+                            i += (entry.getValue().getValue() / 10);
+                        }else {
+                            i += entry.getValue().getValue();
+                        }
                     }else if(entry.getKey() < 6 && entry.getValue().getValue() != -1) {
                         sc += entry.getValue().getValue();
                     }else if(entry.getKey() < 9 && entry.getValue().getValue() != -1) {
@@ -83,6 +87,7 @@ public class TFI extends JFrame{
                     }
                 }
                 
+                System.out.println(i + " " + sc + " " + c + " " + sl + " " + a + " " + r + " " + q + " " + em);
                 for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
                     if(entry.getValue().getValue() == -1) {
                         invalids++;
@@ -176,12 +181,7 @@ public class TFI extends JFrame{
             
         }
         });
-//      name.setBounds(10, 10, 10, 20);
-//      nameText.setBounds(30, 10, 100, 20);
-//      date.setBounds(10, 30, 10, 20);
-//      dateText.setBounds(30, 30, 100, 20);
         
-        /* instruction portion */
         JTextArea instructions = new JTextArea();
         instructions.setLineWrap(true);                 // add newlines             
         instructions.setWrapStyleWord(true);            // add newlines by word
@@ -229,8 +229,6 @@ public class TFI extends JFrame{
             
             
         };
-        //JPanel[] qPanels = new JPanel[25];
-//      JPanel qPanel = new JPanel(new GridLayout(25, 4));
         JPanel qPanel = new JPanel(new GridBagLayout());
         int question = 0;
         
@@ -245,12 +243,19 @@ public class TFI extends JFrame{
             text.setBorder(null);
             
             if(questions[i].charAt(0) >= '0' && questions[i].charAt(0) <= '9') {
-                JSlider slider = new JSlider(-1, 10);
-                slider.setMajorTickSpacing(1);
+                JSlider slider;
+                if(i == 1 || i == 3) {
+                    slider = new JSlider(-10, 100);
+                    slider.setMajorTickSpacing(10);
+                    slider.setValue(-10);
+                }else {
+                    slider = new JSlider(-1, 10);
+                    slider.setMajorTickSpacing(1);
+                    slider.setValue(-1);
+                }
                 slider.setPaintTicks(true);
                 slider.setPaintLabels(true);
                 slider.setSnapToTicks(true);
-                slider.setValue(-1);
                 slider.setBackground(Color.WHITE);
                 
                 sliderMap.put(question++, slider);
@@ -294,32 +299,21 @@ public class TFI extends JFrame{
         c.gridx = 0;
         c.gridy = 2;
         panel.add(instructions, c);
-//      for (int i = 0; i < qPanels.length; i++)
-//          panel.add(qPanels[i]);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 3;
         panel.add(qPanel, c);
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16); // adjusted for faster scrolling speed
-//        JPanel contentPane = (JPanel) this.getContentPane();
-//        contentPane.add(scrollPane);
         
         this.add(scrollPane, BorderLayout.CENTER);      
-//      this.setContentPane(contentPane);
         
         this.setTitle("Project 3 - TFI");
-//      this.setSize(6000, 6000);                                   // width x height
-//      Dimension DimMax = Toolkit.getDefaultToolkit().getScreenSize(); // set max size of screen
-//      this.setMaximumSize(DimMax);
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         Rectangle bounds = env.getMaximumWindowBounds();
         System.out.println("Screen Bounds: " + bounds );
         
-//      this.setLayout(new BorderLayout());                     // best layout
-//      this.setSize(Math.min(600, bounds.width),Math.min(600, bounds.height));
         this.pack();                                            // pack margins
-//      this.setSize(Math.min(this.getWidth(), bounds.width),Math.min(this.getHeight(), bounds.height));
         this.setLocationRelativeTo(null);                       // centered relative to monitor screen
         this.setVisible(true);                                  // display the frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);    // close on exit
