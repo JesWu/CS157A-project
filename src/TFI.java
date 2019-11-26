@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,6 +12,11 @@ import javax.swing.*;
 
 public class TFI extends JFrame{
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     public TFI(Connection con)
     {
         this.setLayout(new BorderLayout());
@@ -61,7 +65,7 @@ public class TFI extends JFrame{
                 for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
                     if(entry.getValue().getValue() == -1) {
                         s.append("null,");
-                    }else {
+                    }else { 
                         s.append(entry.getValue().getValue() + ",");
                     }
                     if(entry.getKey() < 3 && entry.getValue().getValue() != -1 && entry.getValue().getValue() != -10) {
@@ -206,7 +210,7 @@ public class TFI extends JFrame{
             "8. Your ability to THINK CLEARLY?",
             "9. Your ability to FOCUS ATTENTION on other things besides your tinnitus?",
             "SL Over the PAST WEEK... (0 = low, 10 = high)",
-            "10. How often did your tinnitus make id difficult to FALL ASLEEP or STAY ASLEEP?",
+            "10. How often did your tinnitus make it difficult to FALL ASLEEP or STAY ASLEEP?",
             "11. How often did your tinnitus cause you difficult in getting AS MUCH SLEEP as you needed?",
             "12. How much of the time did your tinnitus keep you from SLEEPING as DEEPLY or as PEACEFULLY as you would have liked?",
             "A Over the PAST WEEK, how much has your tinnitus interfered with... (0 = low, 10 = high)",

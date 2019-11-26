@@ -17,6 +17,6 @@ public class TFIDB {
         con = DriverManager.getConnection(
                 DB_URL,
     USERNAME, PASSWORD);
-        new TFI(con);
+        new Visit();
     }
 }
