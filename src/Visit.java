@@ -5,6 +5,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -55,15 +57,31 @@ public class Visit extends JFrame{
 		 THI
 		 TFI
 		 */
-	
-		JButton InterButton = new JButton("Inital/ Follow-up Interview");
-		InterButton.setPreferredSize(new Dimension(250, 75));
+		
+		/*
+		JButton InteviewButton = new JButton("Inital/ Follow-up Interview");
+		InteviewButton.setPreferredSize(new Dimension(250, 75));
+		
+		*/
 		
 		JButton THIButton = new JButton("Tinnitus Handicap Inventory (THI)");
 		THIButton.setPreferredSize(new Dimension(250, 75));
 		
+		THIButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	new THI();
+            }
+        });
+		
 		JButton TFIButton = new JButton("Tinnitus Functional Index (TFI)");
 		TFIButton.setPreferredSize(new Dimension(250, 75));
+		
+		TFIButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	new TFI(null);
+            }
+        });
+		
 		
 		
 		//Addding components to the panel
@@ -81,7 +99,7 @@ public class Visit extends JFrame{
 		panel.add(VisitNum);
 		panel.add(visitNumText);
 		
-		panel.add(InterButton);
+		//panel.add(InterButton);
 		panel.add(THIButton);
 		panel.add(TFIButton);
 		
