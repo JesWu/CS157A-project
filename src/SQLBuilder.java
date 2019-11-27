@@ -2,9 +2,6 @@ import java.sql.*;
 
 public class SQLBuilder
 {
-	public static String USERNAME = new String("Jeff");
-    public static String PASSWORD = new String("1234");
-	public static String DB_URL = new String("jdbc:mysql://localhost:3306/test");
 	public static String JDBC_DRIVER = new String("com.mysql.cj.jdbc.Driver");
 	static String[]	Tables = {
 					"create table TFI (" +
@@ -52,20 +49,45 @@ public class SQLBuilder
 					        "VisitNum int not null, " +
 					        "FirstName varchar(16) not null, " +
 					        "LastName varchar(16) not null, " +
-					        "DATE date not null)"
+					        "DATE date not null)",
+					"create table THI (" +
+					        "VISIT_ID int not null," +
+							"Sc_T int," +
+					        "Sc_F int," +
+							"Sc_E int," +
+					        "Sc_C int," +
+							"F1 int," +
+							"F2 int," +
+							"E3 int," +
+							"F4 int," +
+							"C5 int," +
+							"E6 int," +
+							"F7 int," +
+							"C8 int," +
+							"F9 int," +
+							"E10 int," +
+							"C11 int," +
+							"F12 int," +
+							"F13 int," +
+							"E14 int," +
+							"F15 int," +
+							"E16 int," +
+							"E17 int," +
+							"F18 int," +
+							"C19 int," +
+							"F20 int," +
+							"E21 int," +
+							"E22 int," +
+							"C23 int," +
+							"F24 int," +
+							"E25 int)"
 						};
-
-	public static void
-	build(Connection con) throws ClassNotFoundException
+	public static void build(Connection con) throws ClassNotFoundException
 	{
-		
 		// Load the Driver
-		//Class.forName("oracle.jdbc.driver.OracleDriver");
 		Class.forName(JDBC_DRIVER);
-
 		try
-		{
-	
+		{	
 			// Show some database/driver metadata
 			SQLUtil.printDriverInfo(con);
 
@@ -89,7 +111,7 @@ public class SQLBuilder
 		}
 		catch (SQLException e)
 		{
-          	 	SQLUtil.printSQLExceptions(e);		
-          	 }
+			SQLUtil.printSQLExceptions(e);		
+      	}
 	}	
 }

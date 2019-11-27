@@ -105,12 +105,11 @@ public class Visit extends JFrame{
                     Statement st = con.createStatement();
                     System.out.println(s.toString());
                     st.execute(s.toString());
-                    
                 }catch (SQLException sq)
                 {
                     SQLUtil.printSQLExceptions(sq);      
                  }
-            	new THI(); // move this in the try if we dont want it to open
+                new THI(con);
             }
         });
 		
