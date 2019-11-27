@@ -8,6 +8,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,6 +30,9 @@ public class Visit extends JFrame{
 		//JPanel stuff
 		JPanel panel = new JPanel();
 			
+		//JTextField array
+		ArrayList<JTextField> list = new ArrayList<>();
+		
 		/*
 		 labels and text boxes for:
 		 name
@@ -36,7 +42,7 @@ public class Visit extends JFrame{
 		 visit#
 		 */
 		JLabel name = new JLabel("Your Name: ");
-		JTextField nameText = new JTextField(15);		
+		JTextField nameText = new JTextField(15);
 		
 		JLabel date = new JLabel("Date: ");				
 		JTextField dateText = new JTextField(10);		
@@ -50,7 +56,11 @@ public class Visit extends JFrame{
 		JLabel VisitNum = new JLabel("Visit number: ");	
 		JTextField visitNumText= new JTextField(3);		
 			
-		
+		list.add(IdText); //0
+		list.add(thcText); //1
+		list.add(visitNumText); //2
+		list.add(nameText); //3
+		list.add(dateText); //4
 		//buttons
 		/*
 		 buttons added for:
@@ -70,7 +80,37 @@ public class Visit extends JFrame{
 		
 		THIButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new THI();
+                StringBuilder s = new StringBuilder();
+                s.append("insert into VISIT values(");
+                for(int i = 0; i < list.size(); i++) {
+                    if(list.get(i).getText().isEmpty()) {
+                        System.out.println("Empty field");
+                    }else {
+                        //name
+                        if(i == 3) {
+                            String[] name = list.get(i).getText().split(" ");
+                            s.append("'" + name[0] + "',");
+                            s.append("'" + name[1] + "',");
+                            //date
+                        }else if(i == 4) {
+                            s.append("'" + list.get(i).getText() + "',");
+                        }else {
+                            s.append(list.get(i).getText() + ",");
+                        }
+                    }
+                }
+                s.setLength(s.length() - 1);
+                s.append(")");
+                try{
+                    Statement st = con.createStatement();
+                    System.out.println(s.toString());
+                    st.execute(s.toString());
+                    
+                }catch (SQLException sq)
+                {
+                    SQLUtil.printSQLExceptions(sq);      
+                 }
+            	new THI(); // move this in the try if we dont want it to open
             }
         });
 		
@@ -79,6 +119,36 @@ public class Visit extends JFrame{
 		
 		TFIButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                StringBuilder s = new StringBuilder();
+                s.append("insert into VISIT values(");
+                for(int i = 0; i < list.size(); i++) {
+                    if(list.get(i).getText().isEmpty()) {
+                        System.out.println("Empty field");
+                    }else {
+                        //name
+                        if(i == 3) {
+                            String[] name = list.get(i).getText().split(" ");
+                            s.append("'" + name[0] + "',");
+                            s.append("'" + name[1] + "',");
+                            //date
+                        }else if(i == 4) {
+                            s.append("'" + list.get(i).getText() + "',");
+                        }else {
+                            s.append(list.get(i).getText() + ",");
+                        }
+                    }
+                }
+                s.setLength(s.length() - 1);
+                s.append(")");
+                try{
+                    Statement st = con.createStatement();
+                    System.out.println(s.toString());
+                    st.execute(s.toString());
+                    
+                }catch (SQLException sq)
+                {
+                    SQLUtil.printSQLExceptions(sq);      
+                 }
             	new TFI(con);
             }
         });

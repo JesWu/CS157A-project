@@ -45,7 +45,14 @@ public class SQLBuilder
 					        "R int, " +
 					        "Q int, " +
 					        "E int, " +
-					        "Total int)"
+					        "Total int)",
+					"create table Visit (" +
+					        "ID int not null, " +
+					        "THC int not null, " +
+					        "VisitNum int not null, " +
+					        "FirstName varchar(16) not null, " +
+					        "LastName varchar(16) not null, " +
+					        "DATE date not null)"
 						};
 
 	public static void
