@@ -63,7 +63,7 @@ public class TFI extends JFrame{
                 StringBuilder s = new StringBuilder();
                 s.append("insert into TFI values(" + id + ",'" + dateText.getText() + "','" + namep[0] + "','" + namep[1] + "',");
                 for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
-                    if(entry.getValue().getValue() == -1) {
+                    if(entry.getValue().getValue() == -1 || entry.getValue().getValue() == -10) {
                         s.append("null,");
                     }else { 
                         s.append(entry.getValue().getValue() + ",");

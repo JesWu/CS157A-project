@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import javax.swing.JTextField;
 
 public class Visit extends JFrame{
 
-	public Visit() {
+	public Visit(Connection con) {
 
 		this.setLayout(new BorderLayout());
 		
@@ -78,7 +79,7 @@ public class Visit extends JFrame{
 		
 		TFIButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	new TFI(null);
+            	new TFI(con);
             }
         });
 		
