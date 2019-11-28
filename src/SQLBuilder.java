@@ -1,5 +1,10 @@
 import java.sql.*;
 
+/**
+ * SQLBuilder class provides methods to create tables for the database
+ * @author Team 7
+ *
+ */
 public class SQLBuilder
 {
 	public static String JDBC_DRIVER = new String("com.mysql.cj.jdbc.Driver");
@@ -82,6 +87,11 @@ public class SQLBuilder
 							"F24 int," +
 							"E25 int)"
 						};
+	/**
+	 * Executes create tables specified in Tables variable
+	 * @param con connection for connecting to the database
+	 * @throws ClassNotFoundException
+	 */
 	public static void build(Connection con) throws ClassNotFoundException
 	{
 		// Load the Driver

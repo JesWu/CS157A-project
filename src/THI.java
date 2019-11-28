@@ -8,6 +8,11 @@ import java.sql.Statement;
 
 import javax.swing.*;
 
+/**
+ * THI class used for creating Tinnitus Handicap Inventory (THI) questionnaire
+ * @author Thomas Wei
+ *
+ */
 public class THI extends JFrame
 {	
 	private int sum = 0;
@@ -16,6 +21,13 @@ public class THI extends JFrame
 	private int catastrophic = 0;
 	private int[] values = new int[25];
 	
+	/**
+	 * 
+	 * THI constructor which is passed in a Connection object as a parameter.
+	 * The logic and GUI portion is all done in the constructor
+	 * 
+	 * @param con the connection being used through this GUI
+	 */
 	public THI(Connection con)
 	{
 		this.setLayout(new BorderLayout());				// allows window to resize relative to center of jframe
@@ -90,7 +102,7 @@ public class THI extends JFrame
 			final int index = i;
 			JRadioButton rb1 = new JRadioButton("Yes (4)");
 			JRadioButton rb2 = new JRadioButton("Sometimes (2)");
-			JRadioButton rb3 = new JRadioButton("No (0)", true);
+			JRadioButton rb3 = new JRadioButton("No (0)", true); // set as default
 			ButtonGroup group = new ButtonGroup();
 			JTextArea text = new JTextArea(questions[i]);
 			
@@ -164,6 +176,8 @@ public class THI extends JFrame
 			c.gridy = 4 + i;
 			panel.add(qPanel[i], c);
 		}
+		JPanel scoresPanel = new JPanel();
+		JFrame thisRef = this;
 		
         StringBuilder s = new StringBuilder();
         s.append("INSERT INTO THI VALUES(");
@@ -181,8 +195,17 @@ public class THI extends JFrame
 				System.out.println("function " + function);
 				System.out.println("emotion " + emotion);
 				System.out.println("catastrophic " + catastrophic);
+				
+				JOptionPane.showMessageDialog(null,
+					    "total: " + sum + "\nfunction: " + function + "\nemotion: " + emotion + "\ncatastrophic: " + catastrophic,
+					    "Score",
+					    JOptionPane.PLAIN_MESSAGE);
+				c.gridy = 30;
+				panel.add(scoresPanel, c);
+				
 				sum = 0;
 				
+				submit.setEnabled(false);
 	            try {
 	                String query = "SELECT MAX(VISIT_ID) FROM THI";
 	                Statement st = con.createStatement();
@@ -204,6 +227,7 @@ public class THI extends JFrame
 	                // TODO Auto-generated catch block
 	                e1.printStackTrace();
 	            }
+	            thisRef.dispose();
 			}
 		});
 		c.gridy = 29;
@@ -212,7 +236,7 @@ public class THI extends JFrame
         JScrollPane scrollPane = new JScrollPane(panel);
         scrollPane.getVerticalScrollBar().setUnitIncrement(16);	// adjusted for faster scrolling speed
 		
-		this.add(scrollPane, BorderLayout.CENTER);		
+		this.add(scrollPane, BorderLayout.CENTER);
 		
 		this.setTitle("Tinnitus Handicap Inventory (THI)");
 		
