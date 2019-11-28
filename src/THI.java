@@ -29,6 +29,13 @@ public class THI extends JFrame
 		JTextField nameText = new JTextField(15);
 		JLabel date = new JLabel("Date: ");
 		JTextField dateText = new JTextField(10);
+		
+		dateText.setText(DataModel.date);
+		dateText.setEditable(false);
+		dateText.setBackground(Color.WHITE);
+		nameText.setText(DataModel.patient);
+		nameText.setEditable(false);
+		nameText.setBackground(Color.WHITE);
 
 		/* instruction portion */
 		JTextArea instructions = new JTextArea();
@@ -87,7 +94,7 @@ public class THI extends JFrame
 			ButtonGroup group = new ButtonGroup();
 			JTextArea text = new JTextArea(questions[i]);
 			
-//			text.setSize(500, 50);
+			text.setSize(300, 50);
 			text.setLineWrap(true);
 			text.setWrapStyleWord(true);
 			text.setBorder(null);

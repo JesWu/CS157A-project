@@ -1,15 +1,11 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -24,13 +20,8 @@ public class Visit extends JFrame{
 
 		this.setLayout(new BorderLayout());
 		
-		JLabel title = new JLabel("Interview form");	//idk
-		this.add(title, BorderLayout.NORTH);
-		
-		//JPanel stuff
 		JPanel panel = new JPanel();
 			
-		//JTextField array
 		ArrayList<JTextField> list = new ArrayList<>();
 		
 		/*
@@ -41,39 +32,52 @@ public class Visit extends JFrame{
 		 thc#
 		 visit#
 		 */
-		JLabel name = new JLabel("Your Name: ");
-		JTextField nameText = new JTextField(15);
+		JLabel visitID = new JLabel("Visit ID: ");
+		JTextField visitIDText = new JTextField(3);
 		
-		JLabel date = new JLabel("Date: ");				
-		JTextField dateText = new JTextField(10);		
+		JLabel date = new JLabel("Date: ");
+		JTextField dateText = new JTextField(10);
 		
-		JLabel VisitId = new JLabel("Patient ID: ");	
-		JTextField IdText = new JTextField(6);			
+		JLabel patient = new JLabel("Patient Name: ");	
+		JTextField patientText = new JTextField(12);			
 		
 		JLabel thc = new JLabel("Patient THC#: ");		
 		JTextField thcText = new JTextField(6);			
 		
-		JLabel VisitNum = new JLabel("Visit number: ");	
-		JTextField visitNumText= new JTextField(3);		
+		JLabel visitNum = new JLabel("Visit number: ");	
+		JTextField visitNumText= new JTextField(3);
+		
+		java.sql.Timestamp currentDate = new java.sql.Timestamp(new java.util.Date().getTime());
+		dateText.setText(currentDate.toString().substring(0, 10));
+		DataModel.date = dateText.getText();
+		dateText.setEditable(false);
+		
+		int id = 1;
+		try{
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT MAX(ID) FROM Visit");
+            rs.next();
+            id = rs.getInt("MAX(ID)") + 1;
+            System.out.println("id: " + id);
+        }catch (SQLException sq)
+        {
+            SQLUtil.printSQLExceptions(sq);      
+        }
+		visitIDText.setText("" + id);
+		DataModel.id = id;
+		visitIDText.setEditable(false);
 			
-		list.add(IdText); //0
+		list.add(visitIDText); //0
 		list.add(thcText); //1
 		list.add(visitNumText); //2
-		list.add(nameText); //3
+		list.add(patientText); //3
 		list.add(dateText); //4
 		//buttons
 		/*
 		 buttons added for:
-		 interview initial/follow-up
 		 THI
 		 TFI
 		 */
-		
-		/*
-		JButton InteviewButton = new JButton("Inital/ Follow-up Interview");
-		InteviewButton.setPreferredSize(new Dimension(250, 75));
-		
-		*/
 		
 		JButton THIButton = new JButton("Tinnitus Handicap Inventory (THI)");
 		THIButton.setPreferredSize(new Dimension(250, 75));
@@ -81,7 +85,7 @@ public class Visit extends JFrame{
 		THIButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StringBuilder s = new StringBuilder();
-                s.append("insert into VISIT values(");
+                s.append("insert into Visit values(");
                 for(int i = 0; i < list.size(); i++) {
                     if(list.get(i).getText().isEmpty()) {
                         System.out.println("Empty field");
@@ -89,8 +93,10 @@ public class Visit extends JFrame{
                         //name
                         if(i == 3) {
                             String[] name = list.get(i).getText().split(" ");
+                            System.out.println(name[0]);
                             s.append("'" + name[0] + "',");
                             s.append("'" + name[1] + "',");
+                            DataModel.patient = list.get(i).getText();
                             //date
                         }else if(i == 4) {
                             s.append("'" + list.get(i).getText() + "',");
@@ -108,7 +114,7 @@ public class Visit extends JFrame{
                 }catch (SQLException sq)
                 {
                     SQLUtil.printSQLExceptions(sq);      
-                 }
+                }
                 new THI(con);
             }
         });
@@ -119,7 +125,7 @@ public class Visit extends JFrame{
 		TFIButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StringBuilder s = new StringBuilder();
-                s.append("insert into VISIT values(");
+                s.append("insert into Visit values(");
                 for(int i = 0; i < list.size(); i++) {
                     if(list.get(i).getText().isEmpty()) {
                         System.out.println("Empty field");
@@ -129,6 +135,7 @@ public class Visit extends JFrame{
                             String[] name = list.get(i).getText().split(" ");
                             s.append("'" + name[0] + "',");
                             s.append("'" + name[1] + "',");
+                            DataModel.patient = list.get(i).getText();
                             //date
                         }else if(i == 4) {
                             s.append("'" + list.get(i).getText() + "',");
@@ -154,19 +161,19 @@ public class Visit extends JFrame{
 		
 		
 		
-		//Addding components to the panel
-		panel.add(name);
-		panel.add(nameText);
+		//Adding components to the panel
+		panel.add(visitID);
+		panel.add(visitIDText);
 		panel.add(date);
 		panel.add(dateText);
 		
-		panel.add(VisitId);
-		panel.add(IdText);
+		panel.add(patient);
+		panel.add(patientText);
 		
 		panel.add(thc);
 		panel.add(thcText);
 		
-		panel.add(VisitNum);
+		panel.add(visitNum);
 		panel.add(visitNumText);
 		
 		//panel.add(InterButton);
@@ -179,7 +186,7 @@ public class Visit extends JFrame{
 		
 		//Interface settings
 		
-		this.setTitle("Project 3 - Visit");						// title
+		this.setTitle("Interview");								// title
 		this.pack();											// pack margins		
 		this.setSize(510, 300);
 		this.setLocationRelativeTo(null); 						// centered relative to monitor screen

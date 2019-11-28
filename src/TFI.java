@@ -44,6 +44,13 @@ public class TFI extends JFrame{
         JTextField dateText = new JTextField("YYYY-MM-DD",10);
         JButton submit = new JButton("Submit");
         
+		dateText.setText(DataModel.date);
+		dateText.setEditable(false);
+		dateText.setBackground(Color.WHITE);
+		nameText.setText(DataModel.patient);
+		nameText.setEditable(false);
+		nameText.setBackground(Color.WHITE);
+        
         TreeMap<Integer, JSlider> sliderMap = new TreeMap<>();
         
         

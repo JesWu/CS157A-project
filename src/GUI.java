@@ -3,8 +3,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class GUI {
-    public static String USERNAME = new String("Jeff");
-    public static String PASSWORD = new String("1234");
+    public static String USERNAME = new String("root");
+    public static String PASSWORD = new String("sh100");
     public static String DB_URL = new String("jdbc:mysql://localhost:3306/test");
     public static String JDBC_DRIVER = new String("com.mysql.cj.jdbc.Driver");
     
