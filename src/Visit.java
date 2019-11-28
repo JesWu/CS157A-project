@@ -14,8 +14,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * Visit class which is used to generate the Interview screen, where the user can enter the
+ * patient's name, THC, and visit number
+ * 
+ * @author Team 7
+ *
+ */
 public class Visit extends JFrame{
-
+	
+	/**
+	 * constructor which creates the GUI for Interview screen 
+	 * @param con connection for connecting to the database
+	 */
 	public Visit(Connection con) {
 
 		this.setLayout(new BorderLayout());

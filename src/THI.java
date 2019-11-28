@@ -10,7 +10,7 @@ import javax.swing.*;
 
 /**
  * THI class used for creating Tinnitus Handicap Inventory (THI) questionnaire
- * @author Thomas Wei
+ * @author Team 7
  *
  */
 public class THI extends JFrame
