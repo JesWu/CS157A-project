@@ -109,9 +109,11 @@ public class TFI extends JFrame{
                     }
                 }
                 
-                System.out.println(i + " " + sc + " " + c + " " + sl + " " + a + " " + r + " " + q + " " + em);
+                //System.out.println(i + " " + sc + " " + c + " " + sl + " " + a + " " + r + " " + q + " " + em);
+                StringBuilder results = new StringBuilder();
+                results.append("SUBSECTION RESULTS: \r\n");
                 for(Map.Entry<Integer, JSlider> entry: sliderMap.entrySet()) {
-                    if(entry.getValue().getValue() == -1) {
+                    if(entry.getValue().getValue() == -1 || entry.getValue().getValue() == -10) {
                         invalids++;
                         subInvalids++;
                     }else {
@@ -119,83 +121,103 @@ public class TFI extends JFrame{
                     }
                     if(entry.getKey() == 2) {
                         if(subInvalids == 3) {
+                            results.append("Intrusive: Invalid \r\n");
                             s.append("null,");
                         }else {
                             i = (i / (3 - subInvalids)) * 10;
                             s.append(i + ",");
+                            results.append("Intrusive: " + i + "\r\n");
                         }
                         subInvalids = 0;
                     }else if(entry.getKey() == 5) {
                         if(subInvalids == 3) {
+                            results.append("Sense of Control: Invalid \r\n");
                             s.append("null,");
                         }else {
                             sc = (sc / (3 - subInvalids)) * 10;
                             s.append(sc + ",");
+                            results.append("Sense of Control: " + sc + "\r\n");
                         }
                         subInvalids = 0;
                     }else if(entry.getKey() == 8) {
                         if(subInvalids == 3) {
+                            results.append("Cognitive: Invalid\r\n");
                             s.append("null,");
                         }else {
                             c = (c / (3 - subInvalids)) * 10;
                             s.append(c + ",");
+                            results.append("Cognitive: " + c + "\r\n");
                         }
                         subInvalids = 0;
                     }
                     else if(entry.getKey() == 11) {
                         if(subInvalids == 3) {
+                            results.append("Sleep: Invalid \r\n");
                             s.append("null,");
                         }else {
                             sl = (sl / (3 - subInvalids)) * 10;
                             s.append(sl + ",");
+                            results.append("Sleep: " + sl + "\r\n");
                         }
                         subInvalids = 0;
                     }
                     else if(entry.getKey() == 14) {
                         if(subInvalids == 3) {
+                            results.append("Auditory: Invalid\r\n");
                             s.append("null,");
                         }else {
                             a = (a / (3 - subInvalids)) * 10;
                             s.append(a + ",");
+                            results.append("Auditory: " + a + "\r\n");
                         }
                         subInvalids = 0;
                     }
                     else if(entry.getKey() == 17) {
                         if(subInvalids == 3) {
+                            results.append("Relaxation: Invalid\r\n");
                             s.append("null,");
                         }else {
                             r = (r / (3 - subInvalids)) * 10;
                             s.append(r + ",");
+                            results.append("Relaxation: " + r + "\r\n");
                         }
                         subInvalids = 0;
                     }else if(entry.getKey() == 21) {
                         if(subInvalids == 4) {
+                            results.append("Quality of Life: Invalid\r\n");
                             s.append("null,");
                         }else {
                             q = (q / (4 - subInvalids)) * 10;
                             s.append(q + ",");
+                            results.append("Quality of Life: " + q + "\r\n");
                         }
                         subInvalids = 0;
                     }else if(entry.getKey() == 24) {
                         if(subInvalids == 3) {
+                            results.append("Emotional: Invalid\r\n");
                             s.append("null,");
                         }else {
                             em = (em / (3 - subInvalids)) * 10;
                             s.append(em + ",");
+                            results.append("Emotional: " + em + "\r\n");
                         }
                         subInvalids = 0;
                     }
                     
                 }
+                results.append("CUMULATIVE SCORE: \r\n");
                 if(invalids > 6) {
                     s.append("null");
+                    results.append("Not enough questions answered");
                 }else {
                     total = (sum / (25 - invalids)) * 10;
                     s.append(total);
+                    results.append(total);
                 }
                 s.append(")");
                 System.out.println(s.toString());
                 st.execute(s.toString());
+                JOptionPane.showMessageDialog(null, results.toString());
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
