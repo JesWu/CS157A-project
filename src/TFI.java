@@ -10,6 +10,11 @@ import java.util.TreeMap;
 
 import javax.swing.*;
 
+/**
+ * Class file containing the TFI questionnaire.
+ * @author Jeffrey Wu
+ *
+ */
 public class TFI extends JFrame{
     
     /**
@@ -17,6 +22,12 @@ public class TFI extends JFrame{
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructor of the TFI questionnaire including connection to database.
+     * Contains action listeners for submit button and submits entered information into mySQL database.
+     * 
+     * @param con the connection being used through this GUI
+     */
     public TFI(Connection con)
     {
         this.setLayout(new BorderLayout());
