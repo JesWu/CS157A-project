@@ -24,7 +24,7 @@ public class TFI extends JFrame{
 
     /**
      * Constructor of the TFI questionnaire including connection to database.
-     * Contains action listeners for submit button and submits entered information into mySQL database.
+     * Contains action listeners for submit button, which submits entered information into mySQL database.
      * 
      * @param con the connection being used through this GUI
      */
@@ -39,9 +39,9 @@ public class TFI extends JFrame{
         /* name and date portion */
         JPanel top = new JPanel();
         JLabel name = new JLabel("Your Name: ");
-        JTextField nameText = new JTextField("First Last", 15);
+        JTextField nameText = new JTextField(15);
         JLabel date = new JLabel("Date: ");
-        JTextField dateText = new JTextField("YYYY-MM-DD",10);
+        JTextField dateText = new JTextField(10);
         JButton submit = new JButton("Submit");
         
 		dateText.setText(DataModel.date);
