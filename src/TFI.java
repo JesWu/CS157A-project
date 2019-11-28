@@ -53,6 +53,7 @@ public class TFI extends JFrame{
         
         TreeMap<Integer, JSlider> sliderMap = new TreeMap<>();
         
+        TFI thisref = this;
         
         submit.addActionListener(new ActionListener()
         {
@@ -218,6 +219,7 @@ public class TFI extends JFrame{
                 System.out.println(s.toString());
                 st.execute(s.toString());
                 JOptionPane.showMessageDialog(null, results.toString());
+                thisref.dispose();
             } catch (SQLException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
